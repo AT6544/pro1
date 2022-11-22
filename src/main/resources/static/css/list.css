@@ -1,0 +1,56 @@
+h3 {
+  color: #6667AB;
+}
+
+.btn-outline-success:hover {
+  color: #ffffff;
+  background-color: #6667AB;
+  border-color: #6667AB;
+}
+
+.btn-outline-success {
+  color: #6667AB;
+  border-color: #6667AB;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {
+  color: #ffffff;
+  background-color: #6667AB;
+  border-color: #6667AB;
+}
+
+.btn-outline-success:focus, .btn-outline-success.focus {
+  box-shadow: 0 0 0 0.2rem rgb(102, 103, 171);
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {
+  color: #ffffff;
+  background-color: #6667AB;
+  border-color: #6667AB;
+}
+
+.btn-outline-success:focus, .btn-outline-success.focus {
+  box-shadow: 0 0 0 0.2rem rgb(102, 103, 171);
+}
+
+tr.list-table-head {
+  background-color: #6667AB;
+  color: #ffffff;
+}
+
+div.getnoticelist-div-01 {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+div.getnoticelist-div-01 p {
+  margin: auto;
+}
+
+div.getnoticelist-div-02 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/*# sourceMappingURL=list.css.map */

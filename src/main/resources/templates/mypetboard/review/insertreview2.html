@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset = UTF-8">
+        <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+        <block th:replace="common/dropmenu :: menu"></block>
+        <title>문의사항 등록 Page</title>
+
+        <script>
+            $(document).ready(function(){
+                $("input, textarea").focus(function(){
+                    $(this).css("background-color", "powderblue");
+                });
+                $("input, textarea").blur(function(){
+                    $(this).css("background-color", "white");
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+    <header th:replace="common/header :: header"></header>
+    <article>
+    <hr>
+    <h3 th:align="center" style="color:#d2691e">문의사항 등록 Page</h3>
+    <hr>
+            <form th:action="@{/mypetboard/review/insertreview}" method="post">
+                <input type="hidden" name="page" value="0">
+                <input type="hidden" name="size" value="3">
+                <input class="input-group-text" type = "hidden" name = "writer" th:value="${member.id}" size="25"
+                       placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/>
+            <table class="table table-striped" th:align="center" th:border="1" th:cellpadding="0" th:cellspacing="0">
+                <tr>
+                    <td th:width = "100" align="center">분류</td>
+                    <td><select name="category" th:width="20">
+                    <option value="선택안함" selected disabled hidden>=문의사항 선택=</option>
+                    <option value="예약관련">예약관련</option>
+                    <option value="이용관련">이용관련</option>
+                    <option value="불편사항">불편사항</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td th:width="100" th:align="center">작성자</td>
+                    <td><input class="input-group-text" type = "text" name = "writer"  size="25"
+                               placeholder="작성자를 입력하세요" aria-label="작성자를 입력하세요"/></td>
+                </tr>
+                <tr>
+                    <td th:align="center">제목</td>
+                    <td><input class="input-group-text" type = "text" name = "title" size="25"
+                               placeholder="제목을 입력하세요" aria-label="제목을 입력하세요"/></td>
+                </tr>
+                <tr>
+                    <td th:align="center">내용</td>
+                    <td><textarea class="input-group-text" name = "content" cols="40" rows="8"
+                                  placeholder="문의사항을 입력하세요" aria-label="문의사항을 입력하세요"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align = "center">
+                        <input type = "submit" value = "문의사항 등록"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <hr>
+        <a th:href="@{/mypetboard/review/reviewList}"><button class="btn btn-outline-success">문의사항 LIST PAGE</button></a>
+    </article>
+    <footer th:replace="common/footer :: footer"></footer>
+    </body>
+</html>

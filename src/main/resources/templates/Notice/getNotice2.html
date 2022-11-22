@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<div class="container my-3">
+    <head>
+        <title>공지사항 상세</title>
+    </head>
+    <body th:align="center">
+    <div class="container my-3">
+        <h1>공지사항 상세</h1>
+        <form th:action="@{/Notice/updateNotice}" method="post">
+            <input name="seq" type="hidden" th:value="${notice.seq}">
+            <!--수정할게시글번호-->
+            <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
+                <tr>
+                    <td bgcolor="orange" th:text="제목" width="80"></td>
+                    <td><input name="title" type="text" th:value="${notice.title}"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="orange" th:text="작성자"></td>
+                    <td th:text="${notice.writer}"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="orange" th:text="내용"></td>
+                    <td>
+                    <textarea name="content" th:text="${notice.content}" cols="80" rows="30">
+                    </textarea>
+                        <!--글삭제링크를 클릭했을때 삭제할 게시글의 일련번호를 파라미터로 전달-->
+                        <div th:each="img :${imgLoading}">
+                            <img th:src="@{${img}}" alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center">
+                            <div class="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100">
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="orange" th:text="등록일"></td>
+                    <td th:text="${notice.createDate}"></td>
+                </tr>
+                <tr>
+                    <td bgcolor="orange" th:text="조회수"></td>
+                    <td th:text="${notice.cnt}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="게시글수정">
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <a th:href="@{/Notice/getNoticeList}">목록</a>
+            <a th:href="@{/Notice/deleteNotice(seq=${notice.seq})}" th:onclick="btnDel([[${notice.seq}]]);">글삭제</a>
+        </form>
+        <br>
+        <br>
+        <!-- 댓글 작성 -->
+        <form th:action="@{|/Reply/insertReply/${notice.seq}|}" method="post" class="my-3">
+            <textarea name="r_content" id="r_content" rows="10" class="form-control"></textarea>
+            <input type="submit" value="댓글등록" class="btn btn-primary my-2">
+        </form>
+        <!-- 댓글의 갯수 표시 -->
+        <h2 class="border-bottom my-3 py-2"
+            th:text="|${#lists.size(notice.replyList)}개의 댓글이 있습니다.|"></h2>
+        <!-- 댓글 반복 시작 -->
+        <div class="card my-3" th:each="reply : ${notice.replyList}">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;" th:text="${reply.r_content}"></div>
+                <div class="d-flex justify-content-end">
+                    <div class="badge bg-light text-dark p-2 text-start">
+                        <div th:text="${reply.r_createDate}"></div>
+                    </div>
+                </div>
+                <div class="my-3">
+                    <a th:href="@{|/Reply/modify/${reply.r_seq}|}" class="btn btn-sm btn-outline-secondary"
+                       th:text="수정"></a>
+                    <a href="javascript:void(0);" th:data-uri="@{|/deleteReply/${reply.r_seq}|}"
+                       class="delete btn btn-sm btn-outline-secondary"
+                       th:text="삭제"></a>
+                </div>
+            </div>
+        </div>
+        <!-- 댓글 반복 끝  -->
+    </div>
+    </form>
+    <script>
+        // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
+        function btnDel( seq ) {
+            // 컨펌 처리
+            if( confirm( seq + "번 게시글을 정말 삭제하시겠습니까?") == true ) {
+                location.href = '/Notice/deleteNotice?num=' + seq;
+                //실제 삭제할 데이터를 쿼리스트링을 이용해 전달
+            }
+            else {
+                return;
+            }
+        }
+    </script>
+    <script type='text/javascript'>
+        const delete_elements = document.getElementsByClassName("delete");
+        Array.from(delete_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 삭제하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
+        });
+    </script>
+    </body>
+</html>

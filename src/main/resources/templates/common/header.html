@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="header" id="header">
+    <a class="header-logo" th:href="@{/}">My Pet</a>
+    <!--    <form method="get" action="#">-->
+    <!--        <input class="header-input-text" type="text" name="">-->
+    <!--        <input class="header-input-img" type="submit" value="search">-->
+    <!--                <input type="search"/>-->
+    <ul>
+        <!--로그인 안한 사람들도 볼 수 있게-->
+        <li sec:authorize="isAnonymous() or isAuthenticated()">
+            <a th:href="@{/mypetboard/accommodation/getAccommodationList}">애견숙소</a>
+        </li>
+        <li sec:authorize="isAnonymous() or isAuthenticated()">
+            <a th:href="@{/mypetboard/foodCafe/getFoodCafeList}">애견음식점·카페</a>
+        </li>
+        <li sec:authorize="isAnonymous() or isAuthenticated()">
+            <a th:href="@{/mypetboard/hospital/getHospitalList}">애견병원</a></li>
+        <li sec:authorize="isAnonymous() or isAuthenticated()">
+            <a th:href="@{/mypetboard/beauty/getBeautyList}">애견미용</a></li>
+
+        <!--로그인한 사람들만 보이게-->
+        <li class="header-dropmenu">
+            <a href="/">더보기</a>
+            <ul class="header-dropmenu-02">
+                <!--ADMIN만 보아게, 관리자도 같이 보이게 하기!-->
+                <li class="header-dropmenu-03"
+                    sec:authorize="hasAnyAuthority('ROLE_ADMIN') or hasAnyAuthority('ROLE_MANAGER')">
+                    <a class="header-dropmenu-04" href="/">가게 등록</a>
+                </li>
+                <!--ADMIN만 보이게, 관리자도 같이 보이게 하기!-->
+                <li class="header-dropmenu-03"
+                    sec:authorize="hasAnyAuthority('ROLE_ADMIN') or hasAnyAuthority('ROLE_MANAGER')">
+                    <a class="header-dropmenu-04" href="/">가게 관리</a>
+                </li>
+                <!--로그인한 사람들만 보이게 : 회원, 사업자, 관리자 -->
+                <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
+                    <a class="header-dropmenu-04" th:href="@{/Notice/getNoticeList}">공지사항</a>
+                </li>
+                <!--문의사항은 회원만 가능하게-->
+                <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
+                    <a class="header-dropmenu-04" th:href="@{/mypetboard/review/reviewList(page=0, size=5)}">문의사항</a>
+                </li>
+                <!--로그인 안한 사람들도 볼 수 있게-->
+                <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
+                    <a class="header-dropmenu-04" href="/">내주변</a>
+                </li>
+                <!--로그인한 사람들만 보이게 : 회원, 사업자, 관리자 -->
+                <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
+                    <a class="header-dropmenu-04" href="/">예약내역</a>
+                </li>
+                <!--로그인한 사람들만 보이게-->
+                <li class="header-dropmenu-03" sec:authorize="isAnonymous() or isAuthenticated()">
+                    <a class="header-dropmenu-04" th:href="@{Member/mUpdate/Update}">회원 수정하기</a>
+                </li>
+                <li class="header-dropmenu-03"
+                    sec:authorize="hasAnyAuthority('ROLE_MANAGER')">
+                    <a class="header-dropmenu-04" href="/Member/memberList/members">회원 목록</a>
+                </li>
+            </ul>
+        </li>
+        <!--로그인 안한 사람들도 볼 수 있게-->
+        <li sec:authorize="isAnonymous()">
+            <a href="/Member/Login">로그인</a>
+        </li>
+        <!--로그인한 사람들만 보이게-->
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}">로그아웃</a>
+        </li>
+    </ul>
+    <!--    </form>-->
+</div>
+</html>

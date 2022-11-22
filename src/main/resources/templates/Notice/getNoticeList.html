@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <meta http-equiv="Content-Type" content="text/html; charset = UTF-8">
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/list.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <script>
+
+        $(document).ready(function () {
+            $("#s_button").click(function () {
+                alert("입력하신 (" + $("#keyword").val() + ")으로 검색합니다");
+            });
+        });
+
+        // 삭제 클릭 시 &ndash;&gt; 컨펌 후 &ndash;&gt; 할 일 처리
+        function btnDel(seq) {
+            // 컨펌 처리-->
+            if (confirm("삭제 하시겠습니까?") == true) {
+                location.href = '/Notice/deleteNotice?num=' + seq;
+            } else {
+                return;
+            }
+        }
+    </script>
+    <style>
+        ul > li {
+            display: inline-block;
+            border: 0px solid;
+            padding: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body th:align="center">
+<header th:replace="common/header :: header"></header>
+<article>
+    <h3 th:align="center">공지사항</h3>
+    <hr>
+    <div class="getnoticelist-div-01">
+        <a th:href="@{/Notice/insertNotice}">
+            <button class="btn btn-outline-success">공지사항 등록</button>
+        </a>
+
+        <p>현재 <span th:text="${noticeList.totalElements}" style="font-weight: bold">10</span>개의 공지사항이 있습니다.</p>
+    </div>
+    <form th:action="@{/Notice/getNoticeList}" method="GET">
+        <input type="hidden" name="page" value="0">
+        <input type="hidden" name="size" value="5">
+    </form>
+    <br>
+    <table class="table" th:align="center" border="1" th:cellpadding="1" th:cellspacing="1" th:width="750px">
+        <tr class="list-table-head">
+            <th th:width="50">No</th>
+            <th th:width="150">제목</th>
+            <th th:width="150">내용</th>
+            <th th:width="70">작성자</th>
+            <th th:width="100">등록일</th>
+            <th th:width="60">조회수</th>
+            <th th:width="50"></th>
+        </tr>
+        <!--    each : for문-->
+        <!--    모델에 있는 boardList 배열을 순회해서 board라는 객체를 하나씩 출력(향상된 for문 이랑 비슷하다)-->
+        <tr th:each="notice : ${noticeList}">
+            <td th:name="seq" th:text="${notice.seq}"></td>
+            <!--            <td th:name="category" th:text = "${review.category}"></td>-->
+            <!--
+            a태그를 사용해 연결 링크를 만들고
+            @{/getBoard로 controller에 mapping 주소를 직시해 준다.
+            [HTML(클라이언트)]seq=${board.seq} 에서 [java(서버)]@RequestParam으로 매개변수 전달해 준다]
+            seq(변수명) = ${board.seq}(HTML(타임리프)에서의 데이터(클라이언트)
+            -->
+            <td><a th:href="@{/Notice/getNotice(seq=${notice.seq})}"
+                   th:name="title" th:text="${notice.title}"></a></td>
+            <td th:name="content" th:text="${notice.content}"></td>
+            <td th:name="writer" th:text="${notice.writer}"></td>
+            <!-- dates.format = 날짜를 일정형식으로 바꿔주는 포맷팅 -->
+            <td th:text="${#dates.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:name="cnt" th:text="${notice.cnt}">
+            <td><a th:onclick="btnDel([[${notice.seq}]]);">
+                <button class="btn btn-outline-success">글 삭제</button>
+            </a></td>
+        </tr>
+    </table>
+    <div class="getnoticelist-div-02">
+        <form class="d-flex" th:action="@{/Notice/getNoticeList}" method="GET">
+            <input type="hidden" name="page" value="0">
+            <input type="hidden" name="size" value="3">
+
+            <!--    <select th:type="text" name="scategory" th:value="${scategory}" th:width="20">
+                    <option value="#" selected disabled hidden>=검색 키워드 선택=</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
+                    <option value="writer">작성자</option>
+                </select>-->
+            <input class="input-group-text" id="keyword" size="30" type="text" name="keyword" th:value="${keyword}"
+                   placeholder="검색할 단어를 입력하세요" aria-label="검색할 단어를 입력하세요">
+            <button class="btn btn-outline-success" type="submit" id="s_button">Search</button>
+        </form>
+    </div>
+
+    <p th:align="center">
+        총 글 갯수 : <span th:text="${noticeList.totalElements}">4</span><br>
+        현재 페이지 : <span th:text="${noticeList.pageable.pageNumber+1}">1</span>
+        // 마지막 페이지 : <span th:text="${noticeList.totalPages}">5</span>
+    </p>
+
+    <ul th:align="center">
+        <li><!--if문에서 맨 첫 페이지 이면 Previous 가 비 활성화 되는 문구-->
+            <th:block th:if="${noticeList.pageable.pageNumber+1 == 1 }">
+                <span style="visibility:hidden" th:text="${noticeList.pageable.pageNumber+0}">이전page</span>
+            </th:block>
+            <th:block th:unless="${noticeList.pageable.pageNumber+1 == 1 }">
+                <a href="#" th:href="@{/Notice/getNoticeList(page=${noticeList.pageable.pageNumber-1}, size=5)}"
+                   th:text="${noticeList.pageable.pageNumber+0}">이전page</a>
+            </th:block>
+        </li>
+        <li th:text="${noticeList.pageable.pageNumber+1}">현재page</li>
+        <li>
+            <th:block th:if="${noticeList.totalPages == noticeList.number+1 }">
+                <span style="visibility:hidden" th:text="${noticeList.pageable.pageNumber+2}">다음page</span>
+            </th:block>
+            <th:block th:unless="${noticeList.totalPages == noticeList.number+1 }">
+                <a href="#" th:href="@{/Notice/getNoticeList(page=${noticeList.number+1}, size=5)}"
+                   th:text="${noticeList.pageable.pageNumber+2}">다음page</a>
+            </th:block>
+        </li>
+    </ul>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+
+<!--<script>-->
+<!--    // 삭제 클릭 시 &ndash;&gt; 컨펌 후 &ndash;&gt; 할 일 처리-->
+<!--    function btnDel(seq) {-->
+<!--        // 컨펌 처리-->
+<!--        if(confirm( "레알 삭제 하시겠습니까?") == true ) {-->
+<!--            location.href = '/mypetboard/review/removeReview?seq=' +  seq;-->
+<!--        }-->
+<!--        else {-->
+<!--            return;-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+
+</body>
+</html>

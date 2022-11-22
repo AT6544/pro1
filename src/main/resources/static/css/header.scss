@@ -1,0 +1,82 @@
+@import 'util.scss';
+
+#header {
+  display: grid;
+  width: 100%;
+  height: 4em;
+  margin: auto;
+  padding: 0 2em;
+  grid-template-columns: 150px 1fr;
+  background-color: $header-backcolor;
+  position: fixed;
+  z-index: 10;
+
+  > a.header-logo {
+    display: block;
+    font-family:jalnan;
+    width: inherit;
+    line-height: 2em;
+    font-size: $big-fontsize;
+    font-weight: bold;
+    font-style: oblique;
+    color: $font-color-white;
+  }
+
+  >ul {
+    display: flex;
+    width:100%;
+    height:4em;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    >li {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: $font-color-gray;
+
+      >a {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        color: $font-color-gray;
+      }
+    }
+  }
+}
+
+li.header-dropmenu {
+  display: flex;
+  flex-direction: column;
+
+
+  ul.header-dropmenu-02 {
+    @extend .header-dropmenu;
+    background-color: $header-backcolor;
+    width:12em;
+    display:none;
+    position: absolute;
+    top: 3em;
+
+    li.header-dropmenu-03 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding:1em 0;
+      height:100%;
+
+      a.header-dropmenu-04{
+        color:$font-color-gray;
+      }
+    }
+    li.header-dropmenu-03:hover {
+      background-color: $dropdown-hover-color;
+    }
+  }
+
+}

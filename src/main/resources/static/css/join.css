@@ -1,0 +1,200 @@
+#warapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  width: 122px;
+  height: 103px;
+  background: url(../img/sound_detection_dog_barking-2022.png) 50% 50% no-repeat;
+  line-height: 10em;
+  text-align: center;
+  font-family: "jalnan";
+  font-size: 18px;
+  font-weight: 700;
+  color: #6667AB;
+}
+
+.block {
+  display: block;
+}
+
+input.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+input.join-button-submit {
+  background-color: #6667AB;
+  color: #ffffff;
+}
+
+p.join-p-size, legend.join-p-size {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+select, option {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+textarea.border {
+  width: 24rem;
+  height: 6rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+a.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+a.join-button-submit {
+  display: block;
+  background-color: #6667AB;
+  color: #ffffff;
+  text-align: center;
+}
+
+a.border-01 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+a.join-button-submit-01 {
+  background-color: #6667AB;
+  color: #ffffff;
+}
+
+input.border-01 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+input.join-button-submit-01 {
+  background-color: #6667AB;
+  color: #ffffff;
+}
+
+p.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+div.getnotice-div-01 {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+div.getnotice-down-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.getnotice-div-reverse {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.getnotice-down-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h2.getnotice-h2-01 {
+  display: block;
+  margin: auto;
+}
+
+a.margin-center {
+  margin: auto;
+}
+
+ul.insertmenu-img {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+li.insertmenu-img {
+  margin: 0 0.2em;
+}
+
+li.insertmenu-img-01 {
+  margin: 0 0.2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.replayform-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.replayform-div-01 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=join.css.map */

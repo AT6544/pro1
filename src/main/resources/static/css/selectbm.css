@@ -1,0 +1,18 @@
+article form {
+  display: flex;
+  height: 10em;
+  justify-content: center;
+  align-items: flex-end;
+}
+article form input:first-of-type {
+  border: 1px solid #f7323f;
+  width: 9em;
+  height: 3em;
+}
+article form input:last-of-type {
+  border: none;
+  width: 9em;
+  height: 3em;
+}
+
+/*# sourceMappingURL=selectbm.css.map */

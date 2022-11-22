@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--타임리프 선언 (사용하겠다는 선언)-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/members.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <title>회원목록</title>
+    <style>
+        body article table tr th{
+            background-color:#6667ABFF;
+            color:#ffffff;
+            height:2em;
+            font-size:16px;
+            font-weight:700;
+        }
+
+        body article table tr td{
+            height:2em;
+            font-size:14px;
+        }
+    </style>
+</head>
+<script>
+    var a = "abc";
+</script>
+<!--<p class="test">test color</p>-->
+<body th:align="center">
+<header th:replace="common/header :: header"></header>
+<article>
+    <h1>회원목록</h1>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>ID</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>생년월일</th>
+            <th>핸드폰 번호</th>
+            <th>주소</th>
+            <th>펫 종류</th>
+            <th>펫 생년월일</th>
+            <th>펫 몸무게</th>
+        </tr>
+        <tr th:each="member :${member}">
+            <td th:text="${member.memberNumberSeq}"></td>
+            <td><a th:text="${member.id}"></a></td>
+            <td th:text="${member.password}"></td>
+            <td th:text="${member.name}"></td>
+            <td th:text="${member.year}"></td>
+            <td th:text="${member.phoneNumber}"></td>
+            <td th:text="${member.address}"></td>
+            <td th:text="${member.petT}"></td>
+            <td th:text="${member.petD}"></td>
+            <td th:text="${member.petW}"></td>
+            <td>
+                <!--      account/getAccountList에서 getAccount호출할 때-->
+                <!--      기본 시작점이 templates이기 때문에 -->
+                <!--      절대 경로 일 경우 templates에서 시작하며, 상대경로이면 getAccountList페이지가 있는 폴더에서 시작-->
+                <!--      /를 앞에 붙힐 경우 : 절대경로-->
+                <!--      /를 앞에 "안"붙힐 경우 : 상대경로-->
+                <!-- <a th:href="@{/account/getAccount(seq=${member.seq})}">
+                     <button>상세정보</button>
+                 </a>
+                 <a th:href="@{/account/deleteAccount(seq=${member.seq})}">
+                     <button>삭제하기</button>
+                 </a> -->
+            </td>
+        </tr>
+    </table>
+<!--    <a th:href="@{/Member/mJoin/Join}">회원등록</a>-->
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

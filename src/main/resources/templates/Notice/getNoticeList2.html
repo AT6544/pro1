@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--타임리프 선언 (사용하겠다는 선언)-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    /*ul > li {*/
+    /*    display: inline-block;*/
+    /*    border: 0px solid;*/
+    /*    padding: 10px;*/
+    /*}*/
+    /*ul {*/
+    /*    margin-left: -50px;*/
+    /*}*/
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 목록</title>
+    <!--    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/getnoticelist.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+</head>
+<!--<p class="test">test color</p>-->
+<body th:align="center">
+<header th:replace="common/header :: header"></header>
+<article>
+    <h1>공지사항 목록</h1>
+    <div>
+        <p class="getNoticeList-p-04">현재 <span th:text="${noticeList.totalElements}">10</span>개의 공지사항이
+            있습니다.</p>
+
+        <form th:action="@{/Notice/getNoticeList}" method="GET">
+            <input type="hidden" name="page" value="0">
+            <input type="hidden" name="size" value="5">
+            <!--검색-->
+            <input class="border" type="text" name="keyword" placeholder="검색 키워드 입력" aria-label="검색 키워드 입력">
+            <input class="join-button-submit" type="submit" value="검색"/>
+        </form>
+        <a th:href="@{/Notice/insertNotice}">공지사항 등록</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>등록일</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <!--model에 있는 데이터를 타임리프는 html에 뿌려주게 되고, 순수한 html파일로 만들어서 톰캣에 전달-->
+        <!--    each : for문-->
+        <!--    모델에 있는 boardList 배열을 순회해서 notice라는 객체를 하나씩 출력 (유사 : 향상된 for문-->
+        <!--        <td th:text="${Notice.seq}"></td>-->
+        <!--
+        a태그를 사용하여 링크를 만들고,
+        @{/getBoard로 controller에 mapping 주소를 직시
+        [HTML(클라이언트)]seq=${board.seq} 에서 [JAVA(서버)]@RequestParam으로 매개변수 전달
+        seq(변수명) = ${board.seq}(HTML(타임리프)에서의 데이터(클라이언트)
+        -->
+        <tr th:each="notice : ${noticeList}">
+            <td><a th:text="${notice.seq}"></a></td>
+            <td><a th:href="@{/Notice/getNotice(seq=${notice.seq})}"
+                   th:text="${notice.title}"></a></td>
+            <td th:text="${notice.content}"></td>
+            <td th:text="${notice.writer}"></td>
+            <!--
+                dates.format = 날짜를 일정형식으로 바꿔주는 포맷팅
+            -->
+            <td th:text="${#dates.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <!--        <td th:text="${board.createDate}"></td>-->
+            <td th:text="${notice.cnt}"></td>
+        </tr>
+    </table>
+
+
+    <div class="getNoticeList-pageing">
+        <p class="getNoticeList-p-01">총 글 갯수 : <span th:text="${noticeList.totalElements}">4</span></p>
+        <p class="getNoticeList-p-02">현재 페이지 : <span th:text="${noticeList.pageable.pageNumber+1}">1</span></p>
+        <p class="getNoticeList-p-03">마지막 페이지 : <span th:text="${noticeList.totalPages}">5</span></p>
+    </div>
+    <ul th:align="center">
+        <li><!--if문에서 맨 첫 페이지 이면 Previous 가 비 활성화 되는 문구-->
+            <th:block th:if="${noticeList.pageable.pageNumber+1 == 1 }">
+                <span style="visibility:hidden" th:text="${noticeList.pageable.pageNumber+0}">이전page</span>
+            </th:block>
+            <th:block th:unless="${noticeList.pageable.pageNumber+1 == 1 }">
+                <a href="#" th:href="@{/Notice/getNoticeList(page=${noticeList.pageable.pageNumber-1}, size=5)}"
+                   th:text="${noticeList.pageable.pageNumber+0}">이전page</a>
+            </th:block>
+        </li>
+        <li th:text="${noticeList.pageable.pageNumber+1}">현재page</li>
+        <li>
+            <th:block th:if="${noticeList.totalPages == noticeList.number+1 }">
+                <span style="visibility:hidden" th:text="${noticeList.pageable.pageNumber+2}">다음page</span>
+            </th:block>
+            <th:block th:unless="${noticeList.totalPages == noticeList.number+1 }">
+                <a href="#" th:href="@{/Notice/getNoticeList(page=${noticeList.number+1}, size=5)}"
+                   th:text="${noticeList.pageable.pageNumber+2}">다음page</a>
+            </th:block>
+        </li>
+    </ul>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+article div {
+  display: grid;
+  grid-row-template: 1fr 1fr 1fr;
+}
+input.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1em;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+input.join-button-submit {
+  background-color: #6667AB;
+  color: #ffffff;
+  height: 2rem;
+  width: 4rem;
+  border-radius: 6px;
+}
+
+/*# sourceMappingURL=insertnotice.css.map */

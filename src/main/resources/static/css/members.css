@@ -1,0 +1,8 @@
+body, body article table tr, body article table tr article table, body article table, body article table article, body article {
+  width: 100%;
+}
+body article table tr th {
+  background: #f7323f;
+}
+
+/*# sourceMappingURL=members.css.map */

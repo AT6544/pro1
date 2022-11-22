@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>음식점 및 카페 등록 페이지</title>
+    <!--다음 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--부트스트랩 api -->
+
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+<div id="warapper">
+    <a class="logo block" href="main.html">My Pet</a>
+    <form id="container" th:object="${foodcafe}" th:action="@{/mypetboard/foodCafe/insertFoodCafe}" method="post" enctype="multipart/form-data">
+        <div>
+            <p class="join-p-size">가게타입</p>
+            <select name="detailCategory" title="2">
+                <option value="음식점">음식점</option>
+                <option value="카페">카페</option>
+            </select>
+        </div>
+        <div>
+            <p class="join-p-size" >가게이름</p>
+            <input type="text" class="border" name="storeName" placeholder="가게이름 입력">
+        </div>
+        <div>
+            <p class="join-p-size" th:for="postcode">주소</p>
+            <input type="text" class="border"  name="Address" th:field="*{address}"  id="Address" placeholder="주소">
+
+        </div>
+        <div>
+            <p class="join-p-size">상세주소</p>
+            <input type="text" class="border" name="DetailAddress" th:field="*{detailAddress}"id="detailAddress" placeholder="상세주소">
+        </div>
+        <div>
+            <p class="join-p-size">우편번호 </p>
+            <input type="number" class="border"name="Postcode" th:field="*{postcode}"  id="postcode" placeholder="우편번호">
+        </div>
+        <div>
+            <p class="join-p-size">주소검색</p>
+            <input type="button" class="border join-button-submit" onclick="Postcode()" value="주소검색">
+        </div>
+        <div>
+            <p class="join-p-size">가게전화번호</p>
+            <input type="tel" class="border"  name="StoreTelephone" placeholder="가게전화번호 입력">
+        </div>
+        <div>
+            <p class="join-p-size">가게 상세</p>
+            <input type="text" class="border"  name="Info" placeholder="가게 상세 입력">
+        </div>
+        <div>
+            <p class="join-p-size">펫 종류</p>
+            <select name="PetSize" title="2">
+                <option value="소형">소형</option>
+                <option value="중형">중형</option>
+                <option value="대형">대형</option>
+                <option value="전체">전체</option>
+            </select>
+        </div>
+        <input type="file" name="foodcafeimage" multiple ="multiple">
+        <div>
+            <input class="border join-button-submit" type="submit" value="가게등록">
+        </div>
+    </form>
+</div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+<!--주소 api -->
+<script src="/js/Addressapi.js"></script>
+
+</body>
+</html>

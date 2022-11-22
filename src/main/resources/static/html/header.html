@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>header</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+    <div id="header">
+        <a class="header-logo" th:href="@{/index}">마이 펫</a>
+        <form method="get" action="#">
+            <input class="header-input-text" type="text" name="" >
+            <input class="header-input-img" type="submit" value="search">
+            <!--        <input type="search"/>-->
+        </form>
+        <ul>
+            <li>
+                <a href="/resources/templates/index">내주변</a>
+                <a href="/templates/index">예약내역</a>
+                <a href="/index">더보기</a>
+                <a href="/Member/Login">로그인</a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>

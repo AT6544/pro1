@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>애견미용실 리스트</title>
+    <!-- Favicon-->
+
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/boardList.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/list.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+
+    <style>
+        .card-img, .card-img-top, .card-img-bottom{
+            width: 100%;
+            height: 150px;
+        }
+        ol, ul{
+            all:unset;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+
+
+
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" th:each="beauty : ${BeautyList}">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" th:src="@{|/images/${beauty.imgName}|}" alt="경로확인"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder"  th:text="${beauty.storeName}"></h5>
+                            <!-- Product price-->
+                            <div th:text="${beauty.info}"></div>
+                            <a class="btn btn-outline-success" th:href="@{getBeauty(seq=${beauty.seq})}">상세정보</a>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <td> <button class="btn btn-outline-success" th:onclick="btnDel([[${beauty.seq}]]);" sec:authorize="hasAnyAuthority('ROLE_MANAGER')">가게삭제</button></td>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<a class="btn btn-outline-success" th:href="@{/mypetboard/beauty/insertBeauty}" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')">가게등록</a>
+<form th:action="@{/mypetboard/foodCafe/getBeautyList}" method="GET">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+         <span style="display:flex; justify-content:flex-end; align-items:center;">
+            <select style="height: 42.5px;" type="text" name="Petsize" th:value="${petSize}">
+                <option value="" selected disabled hidden>== 애견 크기 ==</option>
+                <option th:value="소형">소형견</option>
+                <option th:value="중형">중형견</option>
+                <option th:value="대형">대형견</option>
+                <option th:value="전체">전체</option>
+            </select>
+        </span>
+        <span>
+            <input type="text" class="form-control" id="searchKeyword" name="searchKeyword" th:value="${searchKeyword}" placeholder="검색어 입력" autocomplete="off">
+           </span>
+        <span>
+       <button class="btn btn-outline-success" type="submit">Search</button>
+       </span>
+    </div>
+</form>
+<div th:if ="${!BeautyList.isEmpty()}" class="pagination justify-content-center" >
+    <ul>
+        <li class="btn btn-outline-success" th:classappend="${BeautyList.hasPrevious()} ? 'disabled'" >
+            <a  th:href="@{|?page=${previous}|}">이전</a>
+        </li>
+        <li class="btn btn-outline-success" th:classappend="${BeautyList.hasNext()} ? 'disabled'" >
+            <a class= th:href="@{|?page=${next}|}">다음</a>
+        </li>
+    </ul>
+</div>
+<!-- Footer-->
+<footer th:replace="common/footer :: footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<script>
+    // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
+    function btnDel( seq ) {
+        // 컨펌 처리
+        if( confirm( seq + "번 가게를 정말 삭제하시겠습니까?") == true ) {
+            location.href = '/mypetboard/beauty/deleteBeauty?seq=' + seq;
+            //실제 삭제할 데이터를 쿼리스트링을 이용해 전달
+        }
+        else {
+            return;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>룸 등록페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+</head>
+<body>
+<div th:replace="common/header" :: header></div>
+<article>
+    <div id="warapper">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form id="container" th:action="@{|/mypetboard/accommodation/insertRoom/${accommodation.seq}|}" method="post"
+              enctype="multipart/form-data">
+
+            <div>
+                <p class="join-p-size">룸 이름</p>
+                <input type="text" class="border" name="roomName" placeholder="룸 이름 입력">
+            </div>
+            <div>
+                <p class="join-p-size">룸 상세정보</p>
+                <input type="text" class="border" name="roomInfo" placeholder="룸 상세 정보 입력">
+            </div>
+            <div>
+                <p class="join-p-size">룸 가격</p>
+                <input type="text" class="border" name="roomPrice" placeholder="룸 가격 정보 입력">
+            </div>
+            <div>
+                <p class="join-p-size">룸 타입</p>
+                <input type="text" class="border" name="roomType" placeholder="룸 타입 입력">
+            </div>
+
+            <input type="file" name="roomimage" multiple="multiple">
+            <div>
+                <input class="border join-button-submit" type="submit" value="룸추가">
+            </div>
+        </form>
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">현재 추가된 룸</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <div>
+                            <ul class="insertmenu-img">
+                                <li class="insertmenu-img" th:each="img :${rimgLoading}">
+                                    <img style="width: 200px; height: 300px" th:src="@{${img}}" alt="gallery">
+                                </li>
+                            </ul>
+                            </div>
+                                <ul class="insertmenu-img">
+                                    <li class="insertmenu-img-01" style="width: 200px; height: 100px" th:each="room : ${accommodation.roomList}">
+                                        <div th:text="'룸 이름: '+${room.roomName}"></div>
+                                        <div th:text="'룸 타입: '+${room.roomType}"></div>
+                                        <div th:text="'룸 가격: '+${room.roomPrice}"></div>
+                                        <div th:text="'상세정보: '+${room.roomInfo}"></div>
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+<a class="border join-button-submit margin-center" th:href="@{/mypetboard/accommodation/getAccommodationList}"><span>등록완료</span></a>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+
+<script src="/js/Addressapi.js"></script>
+</div>
+</body>
+</html>

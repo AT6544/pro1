@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <title>댓글 수정</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <div class="replayform-container">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form th:object="${reply}" method="post">
+            <input name="seq" type="hidden" th:value="${reply.r_seq}">
+            <div class="replayform-div-01">
+                <p class="join-p-size">댓글 내용</p>
+                <textarea class="border" rows="10" id="r_content" name="r_content"></textarea>
+            </div>
+            <input class="border join-button-submit" type="submit" value="수정하기">
+        </form>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!-- Bootstrap JS -->
+<script src="/bootstrap.min.js"></script>
+</body>
+</html>

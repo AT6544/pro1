@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <div id="warapper">
+        <a class="logo block" href="main.html"></a>
+        <form id="container" th:action="@{|/mypetboard/foodCafe/insertMenu/${foodcafe.seq}|}" method="post"
+              enctype="multipart/form-data">
+            <div>
+                <p class="join-p-size">메뉴 이름</p>
+                <input type="text" class="border" name="menuName" placeholder="메뉴 이름 입력">
+            </div>
+            <div>
+                <p class="join-p-size">메뉴 상세정보</p>
+                <input type="text" class="border" name="menuInfo" placeholder="메뉴 상세 정보 입력">
+            </div>
+            <div>
+                <p class="join-p-size">메뉴 가격</p>
+                <input type="text" class="border" name="menuPrice" placeholder="메뉴 가격 정보 입력">
+            </div>
+            <div>
+                <p class="join-p-size">메뉴타입</p>
+                <select name="menuType" title="2">
+                    <option value="음료">음료</option>
+                    <option value="음식">음식</option>
+                </select>
+            </div>
+
+            <input type="file" name="menuimage" multiple="multiple">
+            <div>
+                <input class="border join-button-submit" type="submit" value="메뉴추가">
+            </div>
+        </form>
+        <ul class="insertmenu-img">
+            <li class="insertmenu-img" th:each="img :${mimgLoading}">
+                <img style="width: 200px; height: 300px" th:src="@{${img}}" alt="gallery">
+            </li>
+        </ul>
+        <div>
+            <ul class="insertmenu-img">
+                <li class="insertmenu-img-01" style="width: 200px; height: 100px" th:each="menu : ${foodcafe.menuList}">
+                    <div th:text="'상품명: '+${menu.menuName}"></div>
+                    <div th:text="'상품유형: '+${menu.menuType}"></div>
+                    <div th:text="'가격: '+${menu.menuPrice}"></div>
+                    <div th:text="'상세정보: '+${menu.menuInfo}"></div>
+                </li>
+            </ul>
+        </div>
+        <a class="border join-button-submit" th:href="@{/mypetboard/foodCafe/getFoodCafeList}">등록완료</a>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+<!--주소 api -->
+<script src="/js/Addressapi.js"></script>
+</body>
+</html>

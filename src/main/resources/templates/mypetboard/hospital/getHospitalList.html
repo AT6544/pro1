@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/boardList.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/list.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <style>
+        ol, ul{
+            all:unset;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<h1>병원 목록</h1>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5" th:each="hospital : ${hospitalList}">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    <img class="card-img-top" th:src="@{|/images/${hospital.imgname}|}" alt="경로확인"/>
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <a th:href="@{getHospital(seq = ${hospital.seq})}" th:text="${hospital.storeName}"></a>
+                            <!-- Product price-->
+                            <div th:text="${hospital.detailCategory}"></div>
+                            <div th:text="${hospital.info}"></div>
+                        </div>
+                    </div>
+                    <td> <button class="btn btn-outline-success" th:onclick="btnDel([[${hospital.seq}]]);">글삭제</button></td>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:if ="${!hospitalList.isEmpty()}" class="pagination justify-content-center" >
+    <ul>
+        <li class="btn btn-outline-success" th:classappend="${hospitalList.hasPrevious()} ? 'disabled'" >
+            <a  th:href="@{|?page=${previous}|}">이전</a>
+        </li>
+        <li class="btn btn-outline-success" th:classappend="${hospitalList.hasNext()} ? 'disabled'" >
+            <a  th:href="@{|?page=${next}|}">다음</a>
+        </li>
+    </ul>
+</div>
+
+<div class="justify-content-end">
+<a class="btn btn-outline-success" th:href="@{/mypetboard/hospital/insertHospital}" sec:authorize="hasAnyAuthority('ROLE_ADMIN','ROLE_MANAGER')">병원등록</a>
+</div>
+<footer th:replace="common/footer :: footer"></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
+    function btnDel( seq ) {
+        // 컨펌 처리
+        if( confirm( seq + " 게시글을 정말 삭제하시겠습니까?") == true ) {
+            location.href = '/mypetboard/hospital/deleteHospital?seq=' + seq;
+            //실제 삭제할 데이터를 쿼리스트링을 이용해 전달
+        }
+        else {
+            return;
+        }
+    }
+</script>
+
+</body>
+</html>

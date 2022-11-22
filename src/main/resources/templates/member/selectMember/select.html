@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기 입력</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article style="height: 40em">
+    <form th:action="@{/Member/selectMember/select}" method="post">
+        <td><input name="phoneNumber" type="text" th:placeholder="phoneNumber"></td>
+        <input type="submit" value="회원찾기">
+    </form>
+</article>
+<div th:replace="common/footer :: footer"></div>
+
+</body>
+</html>

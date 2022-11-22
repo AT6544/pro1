@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pet</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+
+
+    <!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <div>
+
+    </div>
+    <div>
+        <a th:href="@{/mypetboard/accommodation/getAccommodationList}"><span></span>
+            <p>애견숙소</p></a>
+        <a th:href="@{/mypetboard/foodCafe/getFoodCafeList}"><span></span>
+            <p>애견음식점·카페</p></a>
+        <a th:href="@{/mypetboard/hospital/getHospitalList}"><span></span>
+            <p>애견병원</p></a>
+        <a th:href="@{/mypetboard/beauty/getBeautyList}"><span></span>
+            <p>애견미용</p></a>
+        <!--<a th:href="@{/member/ownermember/insertOwnerMember}"><span></span>
+            <p>사업자회원가입</p></a>
+        <a th:href="@{/}"><span></span>
+            <p>무제</p></a>
+        <a th:href="@{/}"><span></span>
+            <p>무제2</p></a>
+        <a th:href="@{/mypetboard/review/reviewList(page=0, size=5)}"><span></span>
+            <p>문의사항</p></a>-->
+    </div>
+    <div>
+        <h2>마이펫 공지사항</h2>
+        <ul>
+            <li><a href="#"><img src="/img/b2b_banner.png" alt="여기어때 비즈니스">
+                <strong>마이펫 비즈니스</strong>
+                출장부터 케어까지
+                <br>
+                마이펫 비즈니스로 스마트하게</a></li>
+            <li><a href="#"><img src="/img/re_jalnan-2022.png" alt="여기어때 잘난체">
+                <strong>마이펫 서체 출시</strong>
+                젋고 당당한 마이펫 잘난체
+                <br>
+                지금 다운로드 받으세요!</a></li>
+        </ul>
+
+
+    </div>
+    <div>
+        <p>앱 다운 받고 <b>더 많은 혜택</b> 받으세요</p>
+        <a href="#"><img src="/img/banner_and.png" alt=""></a>
+        <a href="#"><img src="/img/banner_ios.png" alt=""></a>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+<!--<h3><font color="red" th:text="${session['member'].id}"></font>로그인 되었습니다.</h3>-->
+<!--
+    <a th:if="${session['member'].role == 'ROLE_ADMIN'}" th:href="@{/deleteBorad(seq=${board.seq})}">글삭제</a>
+    글삭제는 ROLE_ADMIN 을 가진 사용자만 글삭제 가능하게 만든 것.
+-->
+<!--
+사업자 페이지
+<a th:href="@{businessMember/businessMemberPage}">사업자회원 페이지</a>
+
+&lt;!&ndash;시큐리티 : 사업자&ndash;&gt;
+<a th:href="@{businessMember/bmUpdate/bm_Update}">사업자 수정하기</a>
+<a th:href="@{businessMember/selectBusinessMember/selectBM}">사업자 회원 찾기</a>
+-->
+
+
+
+<!--&lt;!&ndash;시큐리티 : 관리자만 볼 수 있게&ndash;&gt;-->
+<!--회원목록-->
+<a th:href="@{/Member/memberList/members}">회원목록</a>
+
+</body>
+</html>

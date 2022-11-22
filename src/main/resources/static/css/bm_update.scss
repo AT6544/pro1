@@ -1,0 +1,80 @@
+$header-backcolor:#f7323f;
+
+article {
+  padding: 0;
+}
+
+.bmupdate-info {
+  padding-top: 4em;
+  background-color: $header-backcolor;
+  color: #f0f0f0;
+}
+
+.bmupdate-info-h2 {
+  font-size: 2em;
+  color: #ffffff;
+  margin: 0 13%;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-column-gap: 1em;
+}
+
+.aside-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1em 0.5em;
+
+  ul li {
+    display: flex;
+    width: 6em;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.1em;
+    font-weight: bold;
+
+    a.bmupdate-select {
+      color: $header-backcolor;
+    }
+  }
+}
+
+.content {
+  form div {
+    margin: 1em 0;
+  }
+
+  strong {
+    display: block;
+  }
+
+  .form-1{
+    a {
+      display:block;
+      margin: 1em 0;
+    }
+  }
+}
+
+p.border, input.border, button.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+p.bmupdate-button, input.bmupdate-button, button.bmupdate-button {
+  width: 12rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgb(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+  cursor: pointer;
+}

@@ -1,0 +1,72 @@
+#header {
+  display: grid;
+  width: 100%;
+  height: 4em;
+  margin: auto;
+  padding: 0 2em;
+  grid-template-columns: 150px 1fr;
+  background-color: #6667AB;
+  position: fixed;
+  z-index: 10;
+}
+#header > a.header-logo {
+  display: block;
+  font-family: jalnan;
+  width: inherit;
+  line-height: 2em;
+  font-size: 36px;
+  font-weight: bold;
+  font-style: oblique;
+  color: #ffffff;
+}
+#header > ul {
+  display: flex;
+  width: 100%;
+  height: 4em;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+#header > ul > li {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+#header > ul > li > a {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+li.header-dropmenu {
+  display: flex;
+  flex-direction: column;
+}
+li.header-dropmenu ul.header-dropmenu-02 {
+  background-color: #6667AB;
+  width: 12em;
+  display: none;
+  position: absolute;
+  top: 3em;
+}
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+  height: 100%;
+}
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03 a.header-dropmenu-04 {
+  color: rgba(255, 255, 255, 0.8);
+}
+li.header-dropmenu ul.header-dropmenu-02 li.header-dropmenu-03:hover {
+  background-color: rgba(255, 166, 0, 0.93);
+}
+
+/*# sourceMappingURL=header.css.map */

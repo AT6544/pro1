@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>insertmember</title>
+    <style>
+
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="../../static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/join.css">
+    <script src="../../static/css/js/includeHTML.js"></script>
+</head>
+<body>
+<div w3-include-html="header.html"></div>
+
+<div id="warapper">
+    <a class="logo block" href="main.html"></a>
+    <form id="container" method="post" action="#">
+        <div>
+            <p class="insertmember-p-size">아이디</p>
+            <input type="text" class="border" placeholder="아이디 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">비밀번호</p>
+            <input type="text" class="border" placeholder="비밀번호 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">비밀번호 재확인</p>
+            <input type="text" class="border" placeholder="비밀번호 확인">
+        </div>
+        <div>
+            <p class="insertmember-p-size">사용자 이름</p>
+            <input type="text" class="border" placeholder="사용자 이름 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">생년월일</p>
+            <input type="date" class="border" placeholder="생년월일 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">핸드폰 번호</p>
+            <input type="tel" class="border" placeholder="핸드폰 번호 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">사용자 주소</p>
+            <input type="text" class="border" placeholder="사용자 주소 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">펫 종류</p>
+            <select name="" id="">
+                <option value="dog">강아지</option>
+                <option value="cat">고양이</option>
+            </select>
+        </div>
+        <div>
+            <p class="insertmember-p-size">펫 생년월일</p>
+            <input type="date" class="border" placeholder="펫 생년월일 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">펫 몸무게</p>
+            <input type="number" class="border" placeholder="펫 몸무게 입력">
+        </div>
+        <!--<div>
+            <fieldset>
+                <legend class="insertmember-p-size">성별</legend>
+                <input type="radio" id="male" name="gender" value="male" checked="checked"> 남자
+                <input type="radio" id="female" name="gender" value="female"> 여자
+            </fieldset>
+
+            <select  name="" id="">
+                <option value="1">남자</option>
+                <option value="2">여자</option>
+            </select>
+
+            <input type="text" class="border" placeholder="성별 입력">
+        </div>
+        <div>
+            <p class="insertmember-p-size">본인 확인 이메일(선택)</p>
+            <input type="email" class="border" placeholder="이메일 입력">
+        </div>-->
+        <div>
+            <input class="border insertmember-button-submit" type="submit" value="제출">
+        </div>
+    </form>
+</div>
+<div w3-include-html="footer.html"></div>
+<script>
+    includeHTML();
+</script>
+</body>
+</html>

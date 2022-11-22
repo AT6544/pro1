@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 유형</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <a th:href="@{/businessMember/bm_Join/bm_Join}">사업자 회원가입</a>
+    <a th:href="@{/Member/mJoin/Join}">일반 회원가입</a>
+    <a th:href="@{index}">뒤로가지</a>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

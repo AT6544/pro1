@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>검색결과</title>
+    <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8">
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+
+    <style>
+        ul > li {
+            display: inline-block;
+            border: 0px solid;
+            padding: 10px;
+        }
+        ul {
+            margin-left: -50px;
+        }
+    </style>
+
+</head>
+
+<body th:align="center">
+
+<h2>resultReview</h2>
+
+
+<table class="table table-striped" th:align="center" border = "1" th:cellpadding = "1" th:cellspacing = "1" th:width="750px">
+
+    <tr>
+        <th th:width = "50">No</th>
+        <th th:width = "100">분류</th>
+        <th th:width = "150">제목</th>
+        <th th:width = "200">내용</th>
+        <th th:width = "100">작성자</th>
+        <th th:width = "100">등록일</th>
+        <th th:width = "50">조회수</th>
+    </tr>
+    <!--model에 있는 데이터를 타임리프는 html에 뿌려주게 되고, 순수한 html파일로 만들어서 톰캣에 전달-->
+
+    <!--    each : for문-->
+    <!--    모델에 있는 boardList 배열을 순회해서 board라는 객체를 하나씩 출력(향상된 for문 이랑 비슷하다)-->
+
+    <tr th:each = "key : ${keyword}">
+        <td th:name="seq" th:text = "${key.seq}"></td>
+        <td th:name="category" th:text = "${key.category}"></td>
+        <td th:name="title" th:text = "${key.title}"></td>
+        <td th:name="content" th:text="${key.content}"></td>
+        <td th:name="writer" th:text = "${key.writer}"></td>
+            <!-- dates.format = 날짜를 일정형식으로 바꿔주는 포맷팅 -->
+        <td th:name="createDate" th:text = "${#dates.format(key.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <!--            <td th:name="cnt" th:text = "${board.cnt}">-->
+    </tr>
+</table>
+
+<p th:align="center">
+    총 글 갯수 : <span style="color: red; font-weight: bold" th:text="${reviews.totalElements}">4</span><br>
+    현재 페이지 : <span style="color: green; font-weight: bold" th:text="${reviews.pageable.pageNumber+1}">1</span><br>
+    마지막 페이지 : <span style="color: blue; font-weight: bold" th:text="${reviews.totalPages}">5</span>
+</p>
+
+<ul th:align="center">
+    <li><!--if문에서 맨 첫 페이지 이면 Previous 가 비 활성화 되는 문구-->
+        <th:block th:if="${reviews.pageable.pageNumber+1 == 1 }">
+            <span style="visibility:hidden" th:text="${reviews.pageable.pageNumber+0}">이전page</span>
+        </th:block>
+        <th:block th:unless="${reviews.pageable.pageNumber+1 == 1 }">
+            <a href="#" th:href="@{/mypetboard/review/resultreview( page=${reviews.pageable.pageNumber-1}, size=5)}" th:text="${reviews.pageable.pageNumber+0}">이전page</a>
+        </th:block>
+    </li>
+    <li th:text="${reviews.pageable.pageNumber+1}">현재page</li>
+    <li>
+        <th:block th:if="${reviews.totalPages == reviews.number+1 }">
+            <span style="visibility:hidden" th:text="${reviews.pageable.pageNumber+2}">다음page</span>
+        </th:block>
+        <th:block th:unless="${reviews.totalPages == reviews.number+1 }">
+            <a href="#" th:href="@{/mypetboard/review/resultreview( page=${reviews.number}+1, size=5)}" th:text="${reviews.pageable.pageNumber+2}">다음page</a>
+        </th:block>
+    </li>
+</ul>
+
+<br>
+<a th:href="@{/mypetboard/review/insertreview}"><button class="btn btn-outline-success">문의사항 등록</button></a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:fragment="menu">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("li.header-dropmenu a, ul.header-dropmenu-02, li.header-dropmenu-03, a.header-dropmenu-04").on("mouseover", function (){
+                $("ul.header-dropmenu-02").show(), function () {
+                    $(this).slideUp();
+                };
+            })
+            $("ul.header-dropmenu-02").on("mouseout", function () {
+                $("ul.header-dropmenu-02").hide(), function () {
+                    $(this).slideDown();
+                }
+            })
+        })
+    </script>
+    </th:block>
+</head>
+<body>
+
+</body>
+</html>

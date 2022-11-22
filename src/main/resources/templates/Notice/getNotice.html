@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 상세</title>
+    <!--다음 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--부트스트랩 api -->
+
+    <!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/getnotice.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <script>
+        /* $(document).ready(function(){
+             $("input, textarea").focus(function(){
+                 $(this).css("background-color", "$header-backcolor");
+             });
+             $("input, textarea").blur(function(){
+                 $(this).css("background-color", "$font-color-white");
+             });
+         });*/
+    </script>
+</head>
+<body>
+<div th:replace="common/header" :: header></div>
+<article>
+    <div id="warapper">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form id="container" th:object="${review}" th:action="@{/Notice/updateNotice}" method="POST">
+            <input type="hidden" name="seq" th:value="${notice.seq}">
+            <!--            <input type="hidden" name="seq" th:value="${reviewList.seq}">-->
+            <!--            <input type="hidden" name="page" value="0">-->
+            <!--            <input type="hidden" name="size" value="3">-->
+            <!--<div>
+                <p class="join-p-size">분류</p>
+                <select name="category" title="2">
+                    <option value="선택안함" selected disabled hidden>=문의사항 선택=</option>
+                    <option value="예약관련">예약관련</option>
+                    <option value="이용관련">이용관련</option>
+                    <option value="불편사항">불편사항</option>
+                </select>
+            </div>-->
+            <!--<div>
+                <p class="join-p-size">작성자</p>
+                <input type="text" class="border" name="writer" placeholder="아이디 자동입력" aria-label="작성자를 입력하세요" disabled>
+            </div>-->
+            <div>
+                <p class="join-p-size">No</p>
+                <p class="border" th:text="${notice.seq}"></p>
+            </div>
+            <!--            <div>-->
+            <!--                <p class="join-p-size">분류</p>-->
+            <!--                <p class="border" th:text="${reviewList.category}" readonly></p>-->
+            <!--            </div>-->
+            <div>
+                <p class="join-p-size">제목</p>
+                <input type="text" class="border" name="title" th:value="${notice.title}"></input>
+            </div>
+            <div>
+                <p class="join-p-size">작성자</p>
+                <p class="border" th:text="${notice.writer}"></p>
+            </div>
+            <div>
+                <p class="join-p-size">내용</p>
+                <textarea class="border" name="content" th:text="${notice.content}"></textarea>
+            </div>
+            <div>
+                <p class="join-p-size">등록일</p>
+                <p class="border" th:text="${#dates.format(notice.createDate, 'yyyy-MM-dd HH:ss')}">
+            </div>
+            <div>
+                <input class="border join-button-submit" type="submit" value="문의사항 수정">
+            </div>
+            <div>
+                <a th:onclick="btnDel(${notice.seq})" class="border join-button-submit"
+                   th:href="@{/Notice/deleteNotice(seq=${notice.seq})}">글삭제</a>
+            </div>
+        </form>
+        <a class="border join-button-submit" th:href="@{/Notice/getNoticeList}">돌아가기</a>
+    </div>
+    <div class="getnotice-down-div">
+
+        <!-- 댓글의 갯수 표시 -->
+        <h2 class="getnotice-h2-01"
+            th:text="|${#lists.size(notice.replyList)}개의 댓글이 있습니다.|"></h2>
+        <div class="getnotice-div-reverse">
+            <!-- 댓글 작성 -->
+            <form th:action="@{|/Reply/insertReply/${notice.seq}|}" method="post" class="getnotice-down-div">
+                <textarea name="r_content" class="border"></textarea>
+                <input type="submit" value="댓글등록" class="border join-button-submit">
+            </form>
+            </form>
+            <!-- 댓글 반복 시작 -->
+            <div class="" th:each="reply : ${notice.replyList}">
+                <div class="getnotice-div-01">
+                    <div class="card-text" style="white-space: pre-line;" th:text="${reply.r_content}"></div>
+                    <div class="d-flex justify-content-end">
+                        <div class="badge bg-light text-dark p-2 text-start">
+                            <div th:text="${reply.r_createDate}"></div>
+                        </div>
+                    </div>
+                    <div class="getnotice-div-01">
+                        <a th:href="@{|/Reply/modify/${reply.r_seq}|}" class="border-01 join-button-submit-01"
+                           th:text="수정"></a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/deleteReply/${reply.r_seq}|}"
+                           class="delete border-01 join-button-submit-01"
+                           th:text="삭제"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 댓글 반복 끝  -->
+
+    <script>
+        // 삭제 클릭 시 --> 컨펌 후 --> 할 일 처리
+        function btnDel(seq) {
+            // 컨펌 처리
+            if (confirm(seq + "번 게시글을 정말 삭제하시겠습니까?") == true) {
+                location.href = '/Notice/deleteNotice?num=' + seq;
+                //실제 삭제할 데이터를 쿼리스트링을 이용해 전달
+            } else {
+                return;
+            }
+        }
+    </script>
+    <script type='text/javascript'>
+        const delete_elements = document.getElementsByClassName("delete");
+        Array.from(delete_elements).forEach(function (element) {
+            element.addEventListener('click', function () {
+                if (confirm("정말로 삭제하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                }
+                ;
+            });
+        });
+    </script>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>문의사항 등록 Page</title>
+    <!--다음 주소 api -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!--부트스트랩 api -->
+
+    <!--    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/join.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+    <script>
+        /* $(document).ready(function(){
+             $("input, textarea").focus(function(){
+                 $(this).css("background-color", "$header-backcolor");
+             });
+             $("input, textarea").blur(function(){
+                 $(this).css("background-color", "$font-color-white");
+             });
+         });*/
+    </script>
+</head>
+<body>
+<div th:replace="common/header" :: header></div>
+<article>
+    <div id="warapper">
+        <a class="logo block" href="main.html">My Pet</a>
+        <form id="container" th:object="${review}" th:action="@{updateReview}" method="POST">
+            <input type="hidden" name="seq" th:value="${reviewList.seq}">
+            <!--            <input type="hidden" name="seq" th:value="${reviewList.seq}">-->
+<!--            <input type="hidden" name="page" value="0">-->
+<!--            <input type="hidden" name="size" value="3">-->
+            <!--<div>
+                <p class="join-p-size">분류</p>
+                <select name="category" title="2">
+                    <option value="선택안함" selected disabled hidden>=문의사항 선택=</option>
+                    <option value="예약관련">예약관련</option>
+                    <option value="이용관련">이용관련</option>
+                    <option value="불편사항">불편사항</option>
+                </select>
+            </div>-->
+            <!--<div>
+                <p class="join-p-size">작성자</p>
+                <input type="text" class="border" name="writer" placeholder="아이디 자동입력" aria-label="작성자를 입력하세요" disabled>
+            </div>-->
+            <div>
+                <p class="join-p-size">No</p>
+                <p class="border" th:text="${reviewList.seq}" readonly></p>
+            </div>
+            <div>
+                <p class="join-p-size">분류</p>
+                <p class="border" th:text="${reviewList.category}" readonly></p>
+            </div>
+            <div>
+                <p class="join-p-size">제목</p>
+                <input type="text" class="border" name="title" th:value="${reviewList.title}"></input>
+            </div>
+            <div>
+                <p class="join-p-size">작성자</p>
+                <p class="border" th:text="${reviewList.writer}" readonly></p>
+            </div>
+            <div>
+                <p class="join-p-size">내용</p>
+                <textarea class="border" name="content" th:text="${reviewList.content}"></textarea>
+            </div>
+            <div>
+                <p class="join-p-size">등록일</p>
+                <p class="border" th:text="${#dates.format(reviewList.createDate, 'yyyy-MM-dd HH:ss')}" readonly>
+            </div>
+            <div>
+                <input class="border join-button-submit" type="submit" value="문의사항 수정">
+            </div>
+        </form>
+        <a class="border join-button-submit" th:href="@{/mypetboard/review/reviewList}">돌아가기</a>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+<script>
+    includeHTML();
+</script>
+<!--주소 api -->
+<script src="/js/Addressapi.js"></script>
+
+</body>
+</html>

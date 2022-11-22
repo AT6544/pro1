@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <block th:replace="common/dropmenu :: menu"></block>
+
+    <style>
+        .error{
+            color: #bd2130;
+        }
+    </style>
+
+
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <div id="wrapper">
+        <div class="login-div-logo">
+            <a class="logo" href="#">My Pet</a>
+        </div>
+        <form th:action="@{/logins}" method="post">
+            <!--현재 csrf 토큰이 필요없어서 안씀 / 시큐리티컨피그에 csrf를 사용해야 로그아웃 처리가 됨-->
+           <!-- <input type="hidden" th:name="_csrf" th:value="${_csrf.token}">-->
+            <div id="container">
+                <div class="login-containter">
+                    <div class="login-containter-child">
+                        <input name="id" type="text" class="border" placeholder="아이디">
+                        <input name="password" type="password" class="border" placeholder="비밀번호">
+                    </div>
+                    <button class="login-btn" type="submit">로그인</button>
+                </div>
+                <p th:if="${exception} != null" class="text-xs text-gray-500 mt-3" th:text="${exception}"></p>
+                <div>
+                    <ul class="login-ul">
+                        <li><a href="/Member/selectMember/select">사용자 아이디 찾기</a></li>
+                        <li><a href="/Member/mJoin/Join">사용자 회원가입</a></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>애견미용상세페이지</title>
+    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="/css/boardInfo.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+<body>
+<header th:replace="common/header :: header"></header>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src = "@{${imgLoding}}" /></div>
+            <div class="col-md-6">
+                <h3 class="display-5 fw-bolder" th:text="${beauty.storeName}"></h3>
+                <div class="fs-5 mb-5">
+                    <span th:text="${beauty.address}"></span>
+                    <span th:text="${beauty.detailAddress}"></span>
+                    <p class="lead" th:text="${beauty.info}"></p>
+                </div>
+                <div class="small mb-1" th:text="${beauty.petSize}"></div>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to reservation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 bg-light">>
+<div class="container px-4 px-lg-5 mt-5">
+    <h2 class="fw-bolder mb-4">Related FoodCafe</h2>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-7 row-cols-xl-4 justify-content-center">
+        <div class="col mb-7"   >
+            <div class="card h-100"   >
+                <!-- Accommodation details-->
+                <div class="card-body p-4">
+                    <div class="text-center"  >
+                        <!-- Product name-->
+                        <h5 class="fw-bolder" th:text="${beauty.storeName}"></h5>
+                        <!-- Product price-->
+                        <span th:text="${beauty.info}"></span>
+                        <br>
+                        <span th:text="${beauty.address}"></span>
+                        <br>
+                        <span th:text="${beauty.storeTelephone}"></span>
+
+                    </div>
+                </div>
+                <!-- Product actions-->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<div class="col mb-5"   >
+    <div class="card h-100"   >
+        <div id="map" style="width:500px;height:350px;"></div>
+    </div>
+</div>
+
+<div>
+    <a href="#" onclick="history.back(-1); return false;" class="btn btn-secondary justify-content-center">이전페이지로 돌아가기</a>
+</div>
+<footer th:replace="common/footer :: footer"></footer>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=088c012e3c3a608c80dd85e813d377f8&libraries=services"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+            level: 3 // 지도의 확대 레벨
+        };
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+    let Address = [[${beauty.address}]] ;
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(Address , function(result, status) {
+
+        // 정상적으로 검색이 완료됐으면
+        if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+            // 결과값으로 받은 위치를 마커로 표시합니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: coords
+            });
+
+            // 인포윈도우로 장소에 대한 설명을 표시합니다
+            var infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="width:150px;text-align:center;padding:6px 0; border-radius: 5px;">숙소위치</div>'
+            });
+            infowindow.open(map, marker);
+
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        }
+    });
+    /*]]>*/
+</script>
+
+</body>
+</html>

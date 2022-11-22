@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>insertbusiness</title>
+    <style>
+
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="../../static/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/header.css">
+    <link rel="stylesheet" type="text/css" href="../css/join.css">
+    <script src="../../static/css/js/includeHTML.js"></script>
+</head>
+<body>
+<div w3-include-html="header.html"></div>
+
+    <div id="warapper">
+        <a class="logo block" href="main.html"></a>
+<!--        완성 되면 액션 비지니스로 바꿔야함 ex) /insertbusiness/-->
+        <form id="container" method="post" action="main.html">
+            <div>
+                <p class="insertmember-p-size">아이디</p>
+                <input type="text" class="border" placeholder="아이디 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">비밀번호</p>
+                <input type="text" class="border" placeholder="비밀번호 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">비밀번호 재확인</p>
+                <input type="text" class="border" placeholder="비밀번호 확인">
+            </div>
+            <div>
+                <p class="insertmember-p-size">사업자 번호</p>
+                <input type="number" class="border" placeholder="사업자 번호 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">핸드폰 번호</p>
+                <input type="tel" class="border" placeholder="핸드폰 번호 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">가게 전화번호</p>
+                <input type="tel" class="border" placeholder="가게 전화번호 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">가게 이름</p>
+                <input type="text" class="border" placeholder="상호명 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">가게 주소</p>
+                <input type="text" class="border" placeholder="가게 주소 입력">
+            </div>
+            <!--<div>
+                <fieldset>
+                    <legend class="insertmember-p-size">성별</legend>
+                    <input type="radio" id="male" name="gender" value="male" checked="checked"> 남자
+                    <input type="radio" id="female" name="gender" value="female"> 여자
+                </fieldset>
+
+                <select  name="" id="">
+                    <option value="1">남자</option>
+                    <option value="2">여자</option>
+                </select>
+
+                <input type="text" class="border" placeholder="성별 입력">
+            </div>
+            <div>
+                <p class="insertmember-p-size">본인 확인 이메일(선택)</p>
+                <input type="email" class="border" placeholder="이메일 입력">
+            </div>-->
+            <div>
+                <input class="border insertmember-button-submit" type="submit" value="제출">
+            </div>
+        </form>
+    </div>
+    <div w3-include-html="footer.html"></div>
+<script>
+    includeHTML();
+</script>
+</body>
+</html>

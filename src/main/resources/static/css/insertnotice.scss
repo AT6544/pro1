@@ -1,0 +1,42 @@
+@import 'util.scss';
+
+article{
+  div{
+    display: grid;
+    grid-row-template:1fr 1fr 1fr ;
+    h1{
+
+    }
+    form.insertnotice-from-01{
+      div{
+        label{
+
+        }
+        input{
+
+        }
+        textarea{
+
+        }
+      }
+
+
+    }
+  }
+}
+input.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1em;
+  color: rgb(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+input.join-button-submit{
+  background-color:$header-backcolor;
+  color:$font-color-white;
+  height:2rem;
+  width: 4rem;
+  border-radius: 6px;
+}

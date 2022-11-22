@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원찾기 출력</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+</head>
+<body>
+<header th:replace="common/header :: header"></header>
+<article>
+    <table>
+        <tr>
+            <td th:text="${member.id}"></td>
+        </tr>
+    </table>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

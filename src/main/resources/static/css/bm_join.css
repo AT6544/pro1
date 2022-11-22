@@ -1,0 +1,48 @@
+#warapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+}
+
+.logo {
+  display: flex;
+  width: 122px;
+  height: 44px;
+  background: url("/img/h1_mobile.png") 50% 50% no-repeat;
+  background-size: 122px 34px;
+  text-indent: -9999px;
+}
+
+.block {
+  display: block;
+}
+
+input.border {
+  width: 24rem;
+  height: 2rem;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+p.join-p-size, legend.join-p-size {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+select, option {
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  color: rgba(0, 0, 0, 0.56);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+/*# sourceMappingURL=bm_join.css.map */

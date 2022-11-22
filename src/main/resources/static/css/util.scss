@@ -1,0 +1,41 @@
+$header-backcolor: #6667AB;
+//$header-backcolor: #100101;
+//$header-backcolor: rgba(61, 196, 196, 0.8);
+// 음영넣은 색 #42436E
+// 바꿔야 할 색 #f7323f;
+$border-color: 1px solid rgba(0, 0, 0, 0.08);
+$border-test: 1px solid black;
+$dropdown-hover-color: rgba(255, 166, 0, 0.93);
+$font-color-white: #ffffff;
+$font-color-gray: #ffffffcc;
+$big-fontsize: 36px;
+$middle-fontsize: 14px;
+$default-fontsize: 18px;
+$small-fontsize: 10px;
+
+$big-screen: 1080px;
+$middle-screen: 720px;
+$default-screen: 480px;
+$small-screen: 360px;
+
+@mixin mobile {
+  @media (max-width: $default-screen) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $middle-screen) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: $big-screen) {
+    @content;
+  }
+}
+
+@mixin test {
+  border:$border-test;
+}

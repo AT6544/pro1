@@ -1,0 +1,59 @@
+@import "util.scss";
+
+/*전체 박스 규격 세팅해주기*/
+
+@font-face {
+  font-family: jalnan;
+  src:url("../font/jalnan.ttf");
+}
+
+@font-face {
+  font-family: Caveat;
+  src:url("../font/Caveat-Regular.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+/*스크롤바 작동하지만 눈에는 안보이게 하기*/
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/*반응형 되도록 화면에 따른 해상도 설정*/
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  color: rgb(0, 0, 0, 0.56);
+  font-size: $default-fontsize;
+  text-decoration: none;
+}
+
+header, section, nav, article, footer {
+  display: block;
+
+  /*시맨틱태그를 지원하지 않은 브라우저
+  -> 인식하지 못하는 태그를 인라인으로 인식하기때문에 강제로 블럭으로 설정함*/
+}
+
+ul, li {
+  list-style: none;
+
+  /* 목록에 점 없애기 */
+  color: rgb(0, 0, 0, 0.56);
+}
+
+p, a {
+  text-decoration: none;
+  color: rgb(0, 0, 0, 0.56);
+}
+
+article {
+  padding: 5em 5em;
+}

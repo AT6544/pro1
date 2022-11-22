@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<head>
+    <meta charset="UTF-8">
+    <title>질문등록</title>
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">-->
+    <link rel="stylesheet" type="text/css" href="/css/header.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/insertnotice.css"/>
+    <block th:replace="common/dropmenu :: menu"></block>
+</head>
+<body th:align="center">
+<header th:replace="common/header :: header"></header>
+<article>
+    <div>
+        <h1> 공지사항 등록</h1>
+        <!--
+            [클라이언트] html의 form태그를 통한 submit액션을 실행하면 [서버]로 전달되는 mapping주소
+            th:action="insertBoard"
+            mothod="post" // get/post방식으로 데이터 전달 명시하다
+            [서버]컨트롤러에서는 get방식 받는 것과 post방식으로 받는 것을 구분할 수 있습니다
+        th:action="@{/Notice/insertNotice} -->
+        <form class="insertnotice-from-01" th:action="@{/Notice/insertNotice}" method="post" enctype="multipart/form-data">
+            <div>
+                <label class="insertnotice-label-01 insertnotice-label-all" for="title">제목</label>
+                <input class="insertnotice-input-01 insertnotice-input-all" type="text" name="title" id="title">
+            </div>
+            <div>
+                <label class="insertnotice-label-02 insertnotice-label-all" for="writer">작성자</label>
+                <input class="insertnotice-input-02 insertnotice-input-all" type="text" name="writer" id="writer">
+            </div>
+            <div>
+                <label class="insertnotice-label-03 insertnotice-label-all" for="content">내용</label>
+                <textarea class="insertnotice-input-03 insertnotice-input-all" name="content" id="content" rows="10"></textarea>
+            </div>
+                    <input type="submit" value="저장하기">
+            <div>
+                <form class="insertnotice-from-02">
+                    <div>
+                        <label class="insertnotice-label-03 insertnotice-label-all" for="formFileMultiple">이미지 등록 </label>
+                        <input class="insertnotice-input-04 insertnotice-input-all" multiple="multiple" type="file" id="formFileMultiple" name="uploadfile">
+                    </div>
+                </form>
+                <!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
+                <!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
+                <!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
+                <!--    <input multiple="multiple" type="file" name="uploadfile"/>-->
+            </div>
+            <a th:href="@{/Notice/getNoticeList}">공지사항 목록</a>
+        </form>
+    </div>
+</article>
+<footer th:replace="common/footer :: footer"></footer>
+</body>
+</html>

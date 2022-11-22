@@ -1,0 +1,24 @@
+$header-backcolor:#f7323f;
+
+body {
+  width: 100%;
+
+  article {
+    @extend body;
+
+    table {
+      @extend body;
+
+      tr {
+        @extend body;
+
+        th {
+          background: $header-backcolor;
+        }
+
+        td {
+        }
+      }
+    }
+  }
+}
